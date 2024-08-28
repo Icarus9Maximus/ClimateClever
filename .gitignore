@@ -1,0 +1,9 @@
+# Exclude environment variable file
+.env
+
+# Exclude package.json to protect dependencies and scripts
+package.json
+
+# Other files or directories I want to exclude
+node_modules/
+.DS_Store
