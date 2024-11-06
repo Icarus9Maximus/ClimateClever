@@ -26,6 +26,8 @@ const TIMEZONE_API_KEY = process.env.TIMEZONE_API_KEY; // TimezoneDB API key
 app.get("/", (req, res) => {
     res.render("weather.ejs", {
         content: "Wait a minute dawg",
+        city: null,
+        error: null
     })
 });
 

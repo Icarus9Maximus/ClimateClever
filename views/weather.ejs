@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClimateClever</title>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <header class="header">
+            <h1 class="heading">ClimateClever</h1>
+
+            <form id="myForm" method="post">
+                <input type="text" id="locationInput" name="location" placeholder="Enter your city" required>
+                <input type="submit" class="search-button" id="post" value="Search" formaction="/post-weather">
+            </form>
+        </header>
+        
+        <% if (!city && !error) { %>
+            <p>Welcome! Please enter a city to get the weather information.</p>
+        <% } else if (city) { %>
+            <div class="second-container">
+                <div class="weather-card">
+                    <h1 class="city"> <%= city %>, <%= country %> </h1>
+                    <p class="date"> <%= letsatsi %> </p>
+                    <div class="weather-container">
+                        <div class="image-container">
+                            <% if (weather === "Clouds") { %>
+                                <img class="weather-icon" src="/images/cloudy.png" alt="Cloudy weather icon">
+                            <% } else if (weather === "Thunderstorm") { %>
+                                <img class="weather-icon" src="/images/lightning.png" alt="Thunderstorm weather icon">
+                            <% } else if (weather === "Clear") { %>
+                                <img class="weather-icon" src="/images/sunny.png" alt="Clear weather icon">
+                            <% } else if (weather === "Extreme") { %>
+                                <img class="weather-icon" src="/images/severe-weather.png" alt="Extreme weather icon">
+                            <% } else if (weather === "Additional") { %>
+                                <img class="weather-icon" src="/images/windy.png" alt="Wind weather icon">
+                            <% } else if (weather === "Atmosphere") { %>
+                                <img class="weather-icon" src="/images/haze.png" alt="Haze weather icon">
+                            <% } else if (weather === "Snow") { %>
+                                <img class="weather-icon" src="/images/snowflake.png" alt="Snow weather icon">
+                            <% } else if (weather === "Rain") { %>
+                                <img class="weather-icon" src="/images/rain.png" alt="Rain weather icon">
+                            <% } else { %>
+                                <img class="weather-icon" src="/images/drizzle.png" alt="Drizzle weather icon">
+                            <% } %>
+                        </div>
+                        <p class="temperature"><%= temp %> &#176;<span>C</span> </p>
+                        <p class="condition"> <%= condition %> </p>
+                    </div>
+    
+                    <div class="first-segment">
+                        <div class="grid-container">
+                            <div class="detail-card">
+                                <h3>Max</h3>
+                                <p> <%= maxTemp %>&#176;C </p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Min</h3>
+                                <p> <%= minTemp %>&#176;C </p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Wind Speed</h3>
+                                <p><%= windSpeed %>m/s <%= windDirection %> </p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Sunrise</h3>
+                                <p> <%= sunrise %> </p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Sunset</h3>
+                                <p> <%= sunset %> </p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Humidity</h3>
+                                <p> <%= humidity %>%</p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Clouds</h3>
+                                <p> <%= cloudCoverage %>% </p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Visibility</h3>
+                                <p> <%= visibility %>km </p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Pressure</h3>
+                                <p> <%= pressure %>mb </p>
+                            </div>
+                            <div class="detail-card">
+                                <h3>Feels like</h3>
+                                <p> <%= feelTemp %>&#176;C </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include("partials/footer") %>
+        <% } else if (error) { %>
+            <p>Sorry, the city you entered is not valid. Please try again.</p>
+        <% } %>
+    </main>
+</body>
+</html>
